@@ -11,17 +11,17 @@ import paramiko
 async def save_output(process, request, cmd):
     date_time = strftime("%d%m%Y", time.localtime())
 
-    if (request[0:3] == 'LDA' or request[0:3] == 'APS'):
+    if (request[0:3] == 'yyy' or request[0:3] == 'www'):
         dir = '/home/data/Backup/BACKUP_'+date_time+'/'+request[0:6]+'_'+ date_time+'/'
         path = os.path.exists(dir)
-    elif request[0:3] == 'APU' or request[0:3] == 'CAB' or request[0:3] == 'RLA':
+    elif request[0:3] == 'eee' or request[0:3] == 'ttt' or request[0:3] == 'rrr':
         dir = '/home/data/Backup/BACKUP_'+date_time+'/'+request[0:3]+'OLT_'+ date_time+'/'
         path = os.path.exists(dir)
     path = str(dir)
     output = ''
     get=''
     try:
-        if request[0:3] == 'CAB' or request[0:3] == 'APU' or request[0:3] == 'RLA':
+        if request[0:3] == 'ttt' or request[0:3] == 'ttt' or request[0:3] == 'ttt':
             if cmd == 'display ipv6 neighbors' or cmd == 'display current-configuration':
                 while True:
                     get = await process.stdout.readline()
@@ -66,16 +66,16 @@ async def save_output(process, request, cmd):
 
 async def run_client(request, user, password):
     date_time = strftime("%d%m%Y", time.localtime())
-    if (request[0:3] == 'LDA' or request[0:3] == 'APS'):
+    if (request[0:3] == 'ttt' or request[0:3] == 'ttt'):
         dir = '/home/data/Backup/BACKUP_'+date_time+'/'+request[0:6]+'_'+ date_time+'/'
         path = os.path.exists(dir)
-    if request[0:3] == 'APU' or request[0:3] == 'CAB' or request[0:3] == 'RLA':
+    if request[0:3] == 'ttt' or request[0:3] == 'ttt' or request[0:3] == 'ttt':
         dir = '/home/data/Backup/BACKUP_'+date_time+'/'+request[0:3]+'OLT_'+ date_time+'/'
         path = os.path.exists(dir)
 
     if path == True:
 
-        if request[:11] == 'APSDTCRTD01'or request[:11] == 'LDADTCCMT06':
+        if request[:11] == 'aaa'or request[:11] == 'aaa':
             ssh = paramiko.SSHClient()
             ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
             ssh.connect(devices.device(request), port=22, username=user, password=password, look_for_keys='', timeout=200 * 60)
@@ -101,8 +101,8 @@ async def run_client(request, user, password):
 
             async with asyncssh.connect(devices.device(request), port=22, username=user, password=password, known_hosts=None, client_keys=None) as conn:
                 process = await conn.create_process()
-                print ("passei")
-                if request[0:3] == 'APU' or request[0:3] == 'CAB' or request[0:3] == 'RLA':
+               
+                if request[0:3] == 'aaa' or request[0:3] == 'aaa' or request[0:3] == 'aaa':
                     output = ''
                     output = await  process.stdout.readuntil(">")
                     outFile = open(dir + request + '_' + date_time+'.txt', "w")
@@ -117,7 +117,7 @@ async def run_client(request, user, password):
                     if request[6:11] == 'RTD03' or request[6:11] == 'RTD04':
                         output = await  process.stdout.readuntil(">")
                         outFile = open(dir + request + '_' + date_time + '.txt', "w")
-                    elif request[6:11] == 'CMT06':
+                    elif request[6:11] == 'uuu':
 
                         output = await  process.stdout.readuntil(request)
                         outFile = open(dir + request + '_' + date_time + '.txt', "w")
@@ -131,7 +131,7 @@ async def run_client(request, user, password):
                     outFile.write(output + '\n')
 
                     for cmd in comandos:
-                        print (cmd)
+                       
                         if cmd == 'show running-config verbose full':
                             process.stdin.write(cmd + '\n')
 
@@ -141,7 +141,7 @@ async def run_client(request, user, password):
                             await save_output(process, request, cmd)
                     return "ok"
     else:
-        return "Pasta não está criada!."
+        return "error."
 
 
 
