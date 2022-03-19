@@ -18,10 +18,10 @@ def newdir(request):
 
     if path1 == True:
 
-        if (city == 'LDA' or city == 'APS'):
+        if (city == 'ttt' or city == 'ttt'):
 
             dir = '/home/data/Backup/BACKUP_'+date_time+'/'+city+'DTC_'+ date_time
-            print ("aqui" + city)
+          
             path = os.path.exists(dir)
 
             if path == False:
@@ -39,7 +39,7 @@ def newdir(request):
 
                 template = loader.get_template('home.html')
                 return HttpResponse(template.render(context, request))
-        elif city == "APU" or "CAB" or "RLA":
+        elif city == "ttt" or "ttt" or "ttt":
             dir1 = '/home/data/Backup/BACKUP_' + date_time + '/' + city + 'OLT_' + date_time
 
             path = os.path.exists(dir1)
