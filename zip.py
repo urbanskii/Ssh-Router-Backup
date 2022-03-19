@@ -13,7 +13,7 @@ def newzip(request):
 
     city = request.POST.get('name')
 
-    if city == 'lda' or 'aps':
+    if city == 'rrr' or 'rrr':
         dir = '/home/data/Backup/BACKUP_'+ date_time
         path = os.path.exists(dir)
         if path == True:
